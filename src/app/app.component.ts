@@ -82,18 +82,17 @@ export class AppComponent implements OnInit {
   }
 
   id(_val) {
+    if (!_val) {
+      this.arr = [...this.tarr];
+      return;
+    }
+
     const val: number = +_val;
-    
     // Exact match
     const exact = this.tarr.filter(ar => {
       return ar.id === val;
     });
-  console.log(exact)
-    this.arr = [...exact];
-  }
 
-  qwdqwd() {
-    // this.ttt(this.val);
-    // console.log();
+    this.arr = [...exact];
   }
 }

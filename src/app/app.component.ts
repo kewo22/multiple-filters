@@ -7,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class AppComponent implements OnInit {
   arr: any[] = [];
+  tarr: any[] = [];
   val: string = "";
 
   ngOnInit() {
@@ -40,44 +41,59 @@ export class AppComponent implements OnInit {
         name: ""
       }
     ];
+    this.tarr = this.arr;
   }
 
-  ttt(val) {
+  ttt(_val) {
+    const val = _val;
+
     // Exact match
-    const exact = this.arr.filter(ar => {
+    const exact = this.tarr.filter(ar => {
       return ar.name === val;
     });
 
     // Contains
-    const containsAnyWhere = this.arr.filter(ar => {
+    const containsAnyWhere = this.tarr.filter(ar => {
       return ar.name.indexOf(val) !== -1;
     });
 
     // Does Not Contains
-    const doesNotContainsAnyWhere = this.arr.filter(ar => {
+    const doesNotContainsAnyWhere = this.tarr.filter(ar => {
       return ar.name.indexOf(val) === -1;
     });
 
     // startsWith
-    const startsWith = this.arr.filter(ar => {
+    const startsWith = this.tarr.filter(ar => {
       return ar.name.endsWith(val);
     });
 
     // endsWith
-    const endsWith = this.arr.filter(ar => {
+    const endsWith = this.tarr.filter(ar => {
       return ar.name.endsWith(val);
     });
 
     // empty
-    const empty = this.arr.filter(ar => {
-      return ar.name === '' && ar.name.length === 0;
+    const empty = this.tarr.filter(ar => {
+      return ar.name === "" && ar.name.length === 0;
     });
 
-    console.log(empty);
+    this.arr = [...containsAnyWhere];
+    // console.log(empty);
+  }
+
+  id(_val) {
+    const val: number = +_val;
+    
+    // Exact match
+    const exact = this.tarr.filter(ar => {
+      return ar.id === val;
+    });
+  console.log(exact)
+    this.arr = [...exact];
   }
 
   qwdqwd() {
-    this.ttt(this.val);
+    // this.ttt(this.val);
     // console.log();
   }
 }

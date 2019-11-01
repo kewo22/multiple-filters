@@ -44,9 +44,60 @@ export class AppComponent implements OnInit {
     this.tarr = this.arr;
   }
 
+  filter: any = [];
+
   ttt(_val) {
+    const x = this.filter.find(d => {
+      return d.col === "name";
+    });
+
+    if (!x) {
+      this.filter.push({
+        value: _val,
+        op: "eq",
+        col: "name"
+      });
+    } else {
+      x.value = _val;
+    }
+
     const val = _val;
 
+    console.log(this.filter);
+  }
+
+  id(_val) {
+    const x = this.filter.find(d => {
+      return d.col === "id";
+    });
+
+    if (!x) {
+      this.filter.push({
+        value: _val,
+        op: "eq",
+        col: "id"
+      });
+    } else {
+      x.value = _val;
+    }
+
+    console.log(this.filter);
+
+    if (!_val) {
+      this.arr = [...this.tarr];
+      return;
+    }
+
+    const val: number = +_val;
+    // Exact match
+    const exact = this.tarr.filter(ar => {
+      return ar.id === val;
+    });
+
+    this.arr = [...exact];
+  }
+
+  filterrr(val) {
     // Exact match
     const exact = this.tarr.filter(ar => {
       return ar.name === val;
@@ -79,20 +130,5 @@ export class AppComponent implements OnInit {
 
     this.arr = [...containsAnyWhere];
     // console.log(empty);
-  }
-
-  id(_val) {
-    if (!_val) {
-      this.arr = [...this.tarr];
-      return;
-    }
-
-    const val: number = +_val;
-    // Exact match
-    const exact = this.tarr.filter(ar => {
-      return ar.id === val;
-    });
-
-    this.arr = [...exact];
   }
 }

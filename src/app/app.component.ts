@@ -14,27 +14,27 @@ export class AppComponent implements OnInit {
     this.arr = [
       {
         id: 0,
-        name: "Kewin"
+        name: "Lamborghini"
       },
       {
         id: 1,
-        name: "Pravin"
+        name: "Pagani"
       },
       {
         id: 2,
-        name: "Marlon"
+        name: "Maclaren"
       },
       {
         id: 3,
-        name: "Adrian"
+        name: "Koenigsegg"
       },
       {
         id: 4,
-        name: "Vivian"
+        name: "Audi"
       },
       {
         id: 5,
-        name: "Milan"
+        name: "Mercedes Benz"
       },
       {
         id: 6,
@@ -67,25 +67,25 @@ export class AppComponent implements OnInit {
   }
 
   id(_val) {
-    const x = this.filter.find(d => {
-      return d.col === "id";
-    });
-
-    if (!x) {
-      this.filter.push({
-        value: _val,
-        op: "eq",
-        col: "id"
-      });
-    } else {
-      x.value = _val;
-    }
-
-    console.log(this.filter);
-
     if (!_val) {
       this.arr = [...this.tarr];
       return;
+    } else {
+      const x = this.filter.find(d => {
+        return d.col === "id";
+      });
+
+      if (!x) {
+        this.filter.push({
+          value: _val,
+          op: "eq",
+          col: "id"
+        });
+      } else {
+        x.value = _val;
+      }
+
+      console.log(this.filter);
     }
 
     const val: number = +_val;
@@ -97,35 +97,35 @@ export class AppComponent implements OnInit {
     this.arr = [...exact];
   }
 
-  filterrr(val) {
+  filterString(val) {
     // Exact match
     const exact = this.tarr.filter(ar => {
-      return ar.name === val;
+      return ar.name.toLowerCase() === val.toLowerCase();
     });
 
     // Contains
     const containsAnyWhere = this.tarr.filter(ar => {
-      return ar.name.indexOf(val) !== -1;
+      return ar.name.toLowerCase().indexOf(val.toLowerCase()) !== -1;
     });
 
     // Does Not Contains
     const doesNotContainsAnyWhere = this.tarr.filter(ar => {
-      return ar.name.indexOf(val) === -1;
+      return ar.name.toLowerCase().indexOf(val.toLowerCase()) === -1;
     });
 
     // startsWith
     const startsWith = this.tarr.filter(ar => {
-      return ar.name.endsWith(val);
+      return ar.name.toLowerCase().endsWith(val.toLowerCase());
     });
 
     // endsWith
     const endsWith = this.tarr.filter(ar => {
-      return ar.name.endsWith(val);
+      return ar.name.toLowerCase().endsWith(val.toLowerCase());
     });
 
     // empty
     const empty = this.tarr.filter(ar => {
-      return ar.name === "" && ar.name.length === 0;
+      return ar.name.toLowerCase() === "" && ar.name.length === 0;
     });
 
     this.arr = [...containsAnyWhere];
